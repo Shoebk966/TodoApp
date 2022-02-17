@@ -1,23 +1,39 @@
 import logo from './logo.svg';
 import './App.css';
+import Input from './Components/Input';
+import Alert from './Components/Alert';
+import { useGlobalContext } from './Components/Context'
+import List from './Components/List';
+
 
 function App() {
+  const {alert , list, Clearall , showAlert , Removeitem , Edititem} = useGlobalContext()
+    
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='wrapper area'>
+
+<ul className="circles">
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+                    <li></li>
+            </ul>
+    <div className="card-container">
+  <h3 className='heading'>Grocery Bud</h3>
+  { alert.show && <Alert {...alert}  Removealert={showAlert} listitem={list}/>}
+  <Input />
+{ list.length >  0 && (
+  <>   <List items={list} Deleteite={Removeitem}  Edititem={Edititem}/>
+<button className='clr-btn' type='button' onClick={Clearall}>Clear All</button>
+  </>)
+  }
+    </div>
     </div>
   );
 }
